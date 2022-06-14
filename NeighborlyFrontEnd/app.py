@@ -13,13 +13,9 @@ from werkzeug.contrib.atom import AtomFeed
 app = Flask(__name__)
 Bootstrap(app)
 
-
-
 def get_abs_url(url):
     """ Returns absolute url by joining post url with base url """
     return urljoin(request.url_root, url)
-
-
 @app.route('/feeds/')
 def feeds():
     feed = AtomFeed(title='All Advertisements feed',
@@ -27,19 +23,8 @@ def feeds():
 
     response = requests.get(settings.API_URL + '/getAdvertisements')
     posts = response.json()
-
     for key, value in posts.items():
         print("key,value: " + key + ", " + value)
-
-    #     feed.add(post.title,
-    #              content_type='html',
-    #              author= post.author_name,
-    #              url=get_abs_url(post.url),
-    #              updated=post.mod_date,
-    #              published=post.created_date)
-
-    # return feed.get_response()
-
 
 @app.route('/rss')
 def rss():
@@ -48,7 +33,6 @@ def rss():
     fg.description('Feed Description')
     fg.link(href='https://neighborly-client-v1.azurewebsites.net/')
     
-
     response = requests.get(settings.API_URL + '/getAdvertisements')
     ads = response.json()
 
@@ -134,6 +118,20 @@ def main():
     print(' ----->>>> Flask Python Application running in development server')
     app.run(host=settings.SERVER_HOST, port=settings.SERVER_PORT, debug=settings.FLASK_DEBUG)
 
-
 if __name__ == '__main__':
     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
